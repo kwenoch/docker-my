@@ -5,7 +5,7 @@ services:
     image: wettyoss/wetty:${WETTY_VERSION:-latest}
     restart: unless-stopped
     env_file: .env
-    command: --host='::' --ssh-host='host.docker.internal' --base='/' --ssh-port=22
+    command: --host='::' --ssh-host='${WETTY_SSH_HOST:-host.docker.internal}' --base='${WETTY_HTTP_BASE:-/}' --ssh-port='${WETTY_SSH_PORT:-22}'
     user: ${USER_UID:-1000}:${USER_GID:-1000}
     networks:
       - wetty
