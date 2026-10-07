@@ -2,7 +2,7 @@ version: '3'
 
 services:
   mcserver:
-    image: ghcr.io/perplexedtheta/mcserver:${MCSERVER_VERSION:-latest}
+    image: ghcr.io/kwenoch/mcserver:${MCSERVER_VERSION:-latest}
     restart: unless-stopped
     env_file: .env
     volumes:

@@ -2,7 +2,7 @@ version: '3'
 
 services:
   tiger:
-    image: ghcr.io/perplexedtheta/tiger:${TIGER_VERSION:-latest}
+    image: ghcr.io/kwenoch/tiger:${TIGER_VERSION:-latest}
     restart: unless-stopped
     env_file: .env
     user: ${USER_UID:-1000}:${USER_GID:-1000}

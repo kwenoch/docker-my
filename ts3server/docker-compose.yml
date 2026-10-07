@@ -2,7 +2,7 @@ version: '3'
 
 services:
   ts3server:
-    image: ghcr.io/perplexedtheta/ts3server:${TS3SERVER_VERSION:-latest}
+    image: ghcr.io/kwenoch/ts3server:${TS3SERVER_VERSION:-latest}
     restart: unless-stopped
     env_file: .env
     volumes:

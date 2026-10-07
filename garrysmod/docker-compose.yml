@@ -2,7 +2,7 @@ version: '3'
 
 services:
   garrysmod:
-    image: ghcr.io/perplexedtheta/srcds:${SRCDS_VERSION:-latest}
+    image: ghcr.io/kwenoch/srcds:${SRCDS_VERSION:-latest}
     restart: unless-stopped
     env_file: .env
     volumes:
