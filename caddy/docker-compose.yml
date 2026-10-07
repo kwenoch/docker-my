@@ -11,8 +11,8 @@ services:
         source: ${CADDY_APP_ROOT:-/opt/persistent-storage/caddy/app/site}
         target: /srv
       - ${CADDY_CONF_ROOT:-/opt/persistent-storage/caddy/app/conf}:/etc/caddy
-      - caddy_data:/data
-      - caddy_config:/config
+      - ${CADDY_TEMP_ROOT:-/opt/persistent-storage/caddy/app/temp}/data:/data
+      - ${CADDY_TEMP_ROOT:-/opt/persistent-storage/caddy/app/temp}/config:/config
     networks:
       - caddy
     ports:
@@ -21,10 +21,6 @@ services:
       - ${CADDY_HTTPS_PORT:-443}:443/udp
     extra_hosts:
       - host.docker.internal:host-gateway
-
-volumes:
-  caddy_data:
-  caddy_config:
 
 networks:
   caddy:

@@ -5,6 +5,14 @@ services:
     image: sharelatex/sharelatex:${OVERLEAF_VERSION:-latest}
     restart: unless-stopped
     env_file: .env
+    deploy:
+      resources:
+        limits:
+          cpus: 2.0
+          memory: 3G
+        reservations:
+          cpus: 2.0
+          memory: 256M
     stop_grace_period: 60s
     volumes:
       - ${OVERLEAF_APP_ROOT:-/opt/persistent-storage/overleaf/app}:/var/lib/overleaf
@@ -29,9 +37,12 @@ services:
     image: mongo:${MONGO_VERSION:-8.0}
     restart: unless-stopped
     env_file: .env
+    user: ${USER_UID:-1000}:${USER_GID:-1000}
+    entrypoint: "/entrypoint.sh"
     command: "--replSet overleaf"
     volumes:
       - ${MONGO_APP_ROOT:-/opt/persistent-storage/overleaf/mongo}:/data/db
+      - ./mongo/entrypoint.sh:/entrypoint.sh
       - ./mongo/mongodb-init-replica-set.js:/docker-entrypoint-initdb.d/mongodb-init-replica-set.js
     extra_hosts:
       - mongo:127.0.0.1
