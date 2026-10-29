@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+  webdav:
+    image: ghcr.io/vaggeliskls/webdav-server:${WEBDAV_VERSION:-latest}
+    restart: unless-stopped
+    env_file: .env
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    volumes:
+      - ${WEBDAV_DATA_ROOT:-/opt/persistent-storage/webdav/app}:/var/lib/dav/data
+    networks:
+      - webdav
+    ports:
+      - ${WEBDAV_HTTP_PORT:-8080}:8080
+
+networks:
+  webdav:
+    enable_ipv6: true
